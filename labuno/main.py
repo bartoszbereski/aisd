@@ -75,10 +75,9 @@ def gametime():
     else:
         print("player vs computer")
         for i in range(10):
-            printBoard(Board)
-            print("It's your turn:" + turn + " where do you want to move?")
             if turn == 'X':
-                move = input()
+                printBoard(Board)
+                move = input("It's your turn:" + turn + " where do you want to move?")
             else:
                 move = str(randint(1, 9))
             if Board[move] == ' ':
