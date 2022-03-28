@@ -1,11 +1,10 @@
-import glob
-import os
+import glob, os, shutil
 if __name__ == '__main__':
     f = glob.glob('zadanie1/*')
-    for x in f:
-       y = x.split('\\', 1)[1]
-       path=y[0]
+    for file in f:
+       y = file.split('\\')[1]
        try:
-           os.mkdir(path)
-       except OSError as error:
-           print(error)
+         os.mkdir(f'zadanie1/{y[0]}')
+       except FileExistsError:
+           pass
+       os.rename(f'{file}', f'zadanie1/{y[0]}/{y}')
