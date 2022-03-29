@@ -4,10 +4,16 @@ class triangle:
     def __init__(self,x,y,z):
         self.x, self.y, self.z = x, y, z
     def surface(self):
-        p = (self.x+self.y+self.z)/2
-        return sqrt(p*(p-self.x)*(p-self.y)*(p-self.z))
+        if self.x+self.y > self.z:
+            p = (self.x+self.y+self.z)/2
+            return sqrt(p*(p-self.x)*(p-self.y)*(p-self.z))
+        else:
+            return "nie da sie zbudowac trójkąta"
     def circuit(self):
-        return self.x + self.y + self.z
+        if self.x + self.y > self.z:
+            return self.x + self.y + self.z
+        else:
+            return "nie da sie zbudowac trójkąta"
 class square:
     def __init__(self, x):
         self.x = x
