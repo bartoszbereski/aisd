@@ -1,3 +1,5 @@
+from time import time
+import matplotlib.pyplot as plt
 d = 16
 q = 13
 def rabin_karp_matcherhorizontal(T, P, d, q):
@@ -52,15 +54,33 @@ def rabin_karp_matcher(array, string):
     results = rabin_karp_matchervertical(array, string, 16, 13, results_horizontal)
     return results
 if __name__ == '__main__':
-    #f = open('1000_pattern.txt', 'r')
-    with open('1000_pattern.txt') as txt:
-        lines = [line for line in txt]
-    counter = 0
-    for x in range(len(lines)-1):
-        for y in range(len(lines)-1):
-            if(lines[x][y] == 'A' and lines[x][y+1] == 'B' and lines[x][y+2] == 'C' and lines[x+1][y] == 'B' and lines[x+2][y] == 'C'):
-                    #print(x,y)
-                    counter += 1
-    #print (f'liczba wystąpień wzorca {counter}')
-    patterns_found= len(rabin_karp_matcher(lines, "ABC"))
-    print("patterns found: "+str(patterns_found))
+    x = [1000,2000,3000,4000]
+    y1 = []
+    y2 = []
+    start_naive = time()
+    sizes = [1000, 2000, 3000, 4000]
+    for size in sizes:
+        with open(str(size) + '_pattern.txt') as txt:
+            lines = [line for line in txt]
+        counter = 0
+        for x in range(len(lines)-1):
+            for y in range(len(lines)-1):
+                if(lines[x][y] == 'A' and lines[x][y+1] == 'B' and lines[x][y+2] == 'C' and lines[x+1][y] == 'B' and lines[x+2][y] == 'C'):
+                        print(x,y)
+                        counter += 1
+        print("\n")
+        print (f'liczba wystąpień wzorca {counter}')
+        end_naive = time()
+        #y1.append(end_naive-start_naive)
+        print('Naive-execution time: ',end_naive-start_naive)
+        print("\n")
+        start_karp = time()
+        patterns_found= len(rabin_karp_matcher(lines, "ABC"))
+        print("liczba wystąpień wzorca: "+str(patterns_found))
+        end_karp = time()
+        print('Karp-execution time: ', end_karp - start_karp)
+        print("\n")
+        #y1.append(end_karp - start_karp)
+    #plt.plot(x, y1)
+    #plt.plot(x, y2)
+    #plt.show()
