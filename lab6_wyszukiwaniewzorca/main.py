@@ -1,7 +1,13 @@
 from time import time
-import matplotlib.pyplot as plt
 d = 16
 q = 13
+def naive(lines):
+    result = []
+    for x in range(len(lines)-2):
+        for y in range(len(lines)-2):
+            if(lines[x][y] == 'A' and lines[x][y+1] == 'B' and lines[x][y+2] == 'C'and lines[x+1][y] == 'B' and lines[x+2][y] == 'C'):
+                    result.append(str(x) + " " + str(y))
+    return result
 def rabin_karp_matcherhorizontal(T, P, d, q):
     n = len(T)
     m = len(P)
@@ -58,20 +64,15 @@ if __name__ == '__main__':
     y1 = []
     y2 = []
     start_naive = time()
-    sizes = [1000, 2000, 3000, 4000]
+    sizes = [1000, 2000, 3000, 4000,5000,8000]
     for size in sizes:
         with open(str(size) + '_pattern.txt') as txt:
             lines = [line for line in txt]
         counter = 0
-        for x in range(len(lines)-1):
-            for y in range(len(lines)-1):
-                if(lines[x][y] == 'A' and lines[x][y+1] == 'B' and lines[x][y+2] == 'C' and lines[x+1][y] == 'B' and lines[x+2][y] == 'C'):
-                        print(x,y)
-                        counter += 1
         print("\n")
-        print (f'liczba wystąpień wzorca {counter}')
+        print('macierz o rozmiarze', str(size) + 'x' + str(size))
+        print("liczba wystapień wzorca",len(naive(lines)))
         end_naive = time()
-        #y1.append(end_naive-start_naive)
         print('Naive-execution time: ',end_naive-start_naive)
         print("\n")
         start_karp = time()
@@ -80,7 +81,3 @@ if __name__ == '__main__':
         end_karp = time()
         print('Karp-execution time: ', end_karp - start_karp)
         print("\n")
-        #y1.append(end_karp - start_karp)
-    #plt.plot(x, y1)
-    #plt.plot(x, y2)
-    #plt.show()
